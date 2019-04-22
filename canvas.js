@@ -30,6 +30,22 @@ const Color = (opacity) => {
 //enemies arr
 let enemies = []
 
+//畫同心圓的function
+const circleDraw = (r, width, func) => {
+    c.strokeStyle = Color(1)
+    c.lineWidth = width
+    c.beginPath()
+    for(let i =0; i<=360; i++) {
+        let p = Point(r, i)
+        if(func(i)) {
+            c.lineTo(p.x,p.y)
+        } else {
+            c.moveTo(p.x,p.y)
+        }
+    }
+    c.stroke()
+}
+
 class Bar {
     constructor(args) {
         let def = {
@@ -262,20 +278,7 @@ const draw = () => {
         c.stroke()
     }
     
-    const circleDraw = (r, width, func) => {
-        c.strokeStyle = Color(1)
-        c.lineWidth = width
-        c.beginPath()
-        for(let i =0; i<=360; i++) {
-            let p = Point(r, i)
-            if(func(i)) {
-                c.lineTo(p.x,p.y)
-            } else {
-                c.moveTo(p.x,p.y)
-            }
-        }
-        c.stroke()
-    }
+    //畫同心圓
     circleDraw(300, 5, (deg) => {
         return (deg+time/3)%180 < 90
     })
