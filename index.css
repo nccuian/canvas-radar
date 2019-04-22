@@ -1,0 +1,64 @@
+html, body {
+    margin: 0;
+    overflow: hidden;
+}
+#mycanvas {
+    background-color: #111;
+    /* y軸上下顛倒 */
+    transform: scaleY(-1);
+}
+.info {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+}
+.info h1 {
+    font-family: 'Black Ops One', cursive;
+    color: white;
+    margin: 0;
+}
+.info p {
+    font-family: 'Staatliches', cursive;
+    color: white;
+    letter-spacing: 2px;
+    margin: 0;
+}
+.cap-num {
+    color: red;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.horizon-bar {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+}
+.horizon-bar ul {
+    padding: 0;
+    padding-left: 10px;
+    list-style: none;
+    border-left: 3px solid white;
+}
+.horizon-bar ul li {
+    margin-bottom: 10px;
+    padding: 0;
+    width: 200px;
+    height: 30px;
+    background-color: #fff;
+    transition: all .5s;
+}
+.horizon-bar ul li:nth-child(1) {
+    animation: horizon-animation1 1s ease-out infinite ;
+}
+
+
+
+
+@keyframes horizon-animation1 {
+    0% {
+        transform: translateX(-50%)
+    }
+    100% {
+        transform: translateX(0%)
+    }
+}
