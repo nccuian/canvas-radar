@@ -99,7 +99,7 @@ const bar2 = new Bar({
     y:90,
     h: 30,
     v1: 1.05,
-    v2: 0.94
+    v2: 0.95
 })
 const bar3 = new Bar({
     x:-ww/2+50,
@@ -116,7 +116,9 @@ const v_bar1 = new Bar({
 const v_bar2 = new Bar({
     x: 90,
     w: 30,
-    vertical: true
+    vertical: true,
+    v1: 1.03,
+    v2: 0.97
 }) 
 const v_bar3 = new Bar({
     x: 130,
@@ -126,7 +128,9 @@ const v_bar3 = new Bar({
 const v_bar4 = new Bar({
     x: 170,
     w: 30,
-    vertical: true
+    vertical: true,
+    v1: 1.05,
+    v2: 0.95
 }) 
 
 
