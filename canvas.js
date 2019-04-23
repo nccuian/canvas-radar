@@ -46,65 +46,10 @@ const circleDraw = (r, width, func) => {
     c.stroke()
 }
 
-class Bar {
-    constructor(args) {
-        let def = {
-            x:0,
-            y:0,
-            vertical: false,
-            h: 100,
-            w: 100,
-            v1: 1.01,
-            v2: 0.99
-        }
-        Object.assign(def, args)
-        Object.assign(this, def)
-    }
-    draw(x,y) {
-        c.fillStyle = 'white';
-        c.beginPath()
-        c.fillRect(x, y, this.w, this.h)
-    }
-    update() {
-        let x, y
-        if(this.vertical) {
-            x = ww/2 - this.x;
-            y = -wh/2 + 50
-            if(this.h>=50 && this.h<=200) {
-                let ran = Math.floor(Math.random()*10)
-                if(ran%2==0) {
-                    this.h *= this.v1
-                } else {
-                    this.h *= this.v2
-                }
-            } else {
-                if(this.h<50) {
-                    this.h = 100
-                } else {
-                    this.h = 200
-                }
-            }
-        } else {
-            x = -ww/2+50;
-            y = wh/2 - this.y
-            if(this.w>=50 && this.w<=200) {
-                let ran = Math.floor(Math.random()*10)
-                if(ran%2==0) {
-                    this.w *= this.v1
-                } else {
-                    this.w *= this.v2
-                }
-            } else {
-                if(this.w<50) {
-                    this.w = 100
-                } else {
-                    this.w = 200
-                }
-            }
-        }
-        this.draw(x,y)
-    }
-}
+const axis = new Axis()
+
+const clockCircle = new ClockCircle(Color(1))
+
 const bar1 = new Bar({
     x:-ww/2+50,
     y:50,
@@ -149,29 +94,19 @@ const v_bar4 = new Bar({
     v2: 0.95
 }) 
 
-
 let cap_num = 0
 let time = 0; //記錄程式時間，來做一些動畫
-
 //globle var above^^^^^^^^^^
 
 //draw anything 
 const draw = () => {
     //refrash 
     window.requestAnimationFrame(draw);
-    // c.clearRect(-ww/2, -wh/2, ww, wh)
     c.fillStyle = '#111';
     c.fillRect(-ww/2, -wh/2, ww, wh);
 
     //x軸, y軸
-    c.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-    c.lineWidth = 1;
-    c.beginPath();
-    c.moveTo(-ww/2, 0);
-    c.lineTo(ww/2, 0);
-    c.moveTo(0, -wh/2); 
-    c.lineTo(0, wh/2);
-    c.stroke();
+    axis.draw()
 
     time += 1;
     //繪製雷達扇型
@@ -257,26 +192,7 @@ const draw = () => {
     })
 
     //畫刻度
-    const split = 120;
-    let split_len = 5;
-    const split_main = 15;
-    c.strokeStyle = Color(1)
-    for(let i = 0; i<split; i++) {
-        let deg = (i/split)*360 //讓i從0-120變成0-360，畫整圈
-        if(i%split_main==0) {
-            c.lineWidth = 4;
-            split_len = 15
-        } else {
-            c.lineWidth = 1;
-            split_len = 5
-        }
-        let p1 = Point(230, deg)
-        let p2 = Point(230+split_len, deg)
-        c.beginPath()
-        c.moveTo(p1.x,p1.y)
-        c.lineTo(p2.x,p2.y)
-        c.stroke()
-    }
+    clockCircle.draw()
     
     //畫同心圓
     circleDraw(300, 5, (deg) => {
